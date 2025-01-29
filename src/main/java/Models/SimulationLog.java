@@ -1,4 +1,4 @@
 package Models;
 
-public class SimulationLog {
+public class SimulationLog{
 }

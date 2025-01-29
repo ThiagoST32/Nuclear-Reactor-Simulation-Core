@@ -25,7 +25,6 @@ Um projeto de simulação de reator nuclear modular, desenvolvido em 3 etapas:
 ## 🚀 Como Executar  
 ```bash  
 git clone https://github.com/ThiagoST32/nuclear-reactor-simulator.git
-https://github.com/ThiagoST32/Nuclear-Reactor-Simulation-Core.git
 cd nuclear-reactor-simulator  
 docker-compose up -d  # Inicia PostgreSQL  
 ./mvnw spring-boot:run  

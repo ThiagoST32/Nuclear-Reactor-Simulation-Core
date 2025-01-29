@@ -2,7 +2,7 @@
 
 **Simulação de Reator de Fissão Nuclear com Spring Boot e Kotlin**  
 
-![Java](https://img.shields.io/badge/Java-17%2F21-orange)
+![Java](https://img.shields.io/badge/Java-17-orange)
 ![SpringBoot](https://img.shields.io/badge/Spring%20Boot-3.1-blue)
 ![Android](https://img.shields.io/badge/Android-Kotlin-green)
 

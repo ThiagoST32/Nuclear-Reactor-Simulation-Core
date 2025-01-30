@@ -1,6 +1,4 @@
 package Models;
-
-
 public enum ChemicalElement {
     URANIUM_235("U", 92, 238.02891, 1132.2, 3900),
     KRYPTON_92("K",32, 83.798,  -157.36, -153.22),

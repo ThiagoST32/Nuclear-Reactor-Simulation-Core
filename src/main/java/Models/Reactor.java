@@ -1,6 +1,7 @@
 package Models;
 
 
+import DTO.ReactorDTO;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
@@ -24,5 +25,13 @@ public class Reactor {
     private double neutronFlux;
 
     private double tankCapacity;
+
+
+    public Reactor(ReactorDTO reactorDTO){
+        this.reactorType = reactorDTO.reactorType();
+        this.temperature = reactorDTO.temperature();
+        this.neutronFlux = reactorDTO.neutronFlux();
+        this.tankCapacity = reactorDTO.tankCapacity();
+    }
 
 }

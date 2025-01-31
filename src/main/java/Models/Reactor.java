@@ -10,28 +10,34 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 public class Reactor {
     @Id
     private int id;
 
-    private String reactorType;
+    private String reactorType; //Ex: PWR, BWR, Fast Breeder
 
-    private double temperature;
+    private double maxTemperature; //Em Kelvin
 
-    private double neutronFlux;
+    private double maxPressure; //Em MPa
 
-    private double tankCapacity;
+    private double fuelCapacity; //Em kg
+
+    private String moderatorType; //Ex: light water, graphite
+
+    private ReactorSize reactorSize;
 
 
     public Reactor(ReactorDTO reactorDTO){
         this.reactorType = reactorDTO.reactorType();
-        this.temperature = reactorDTO.temperature();
-        this.neutronFlux = reactorDTO.neutronFlux();
-        this.tankCapacity = reactorDTO.tankCapacity();
+        this.maxTemperature = reactorDTO.maxTemperature();
+        this.maxPressure = reactorDTO.maxPressure();
+        this.fuelCapacity = reactorDTO.fuelCapacity();
+        this.moderatorType = reactorDTO.moderatorType();
+        this.reactorSize = reactorDTO.reactorSize();
     }
 
 }

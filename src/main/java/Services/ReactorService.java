@@ -1,6 +1,8 @@
 package Services;
 
 import DTO.ReactorDTO;
+import DTO.ReactorSizeDTO;
+import DTO.UpdateDTOS.ReactorUpdateDTO;
 import Models.Reactor;
 import Repository.ReactorRepository;
 import jakarta.transaction.Transactional;
@@ -14,6 +16,8 @@ public class ReactorService {
 
     @Autowired
     private ReactorRepository reactorRepository;
+
+    private boolean isAllowed = false;
 
     public Reactor createReactor(ReactorDTO reactorDTO){
         Reactor newReactor = new Reactor(reactorDTO);
@@ -33,19 +37,25 @@ public class ReactorService {
         return this.reactorRepository.findById(id).orElseThrow(() -> new RuntimeException("Reactor not Found!!"));
     }
 
-    @Transactional
-    public void deleteReactorById(int id){
-       this.reactorRepository.deleteById(id);
-    }
+//    @Transactional
+//    public void deleteReactorById(int id){
+//       this.reactorRepository.deleteById(id);
+//    }
+//
+//    public Reactor updateReactor(ReactorUpdateDTO reactorUpdateDTO, int id) {
+//        Reactor reactorUpdate = this.getReactorById(id);
+//        if (reactorUpdate != null){
+//            reactorUpdate.setReactorType(reactorUpdateDTO.reactorType());
+//            reactorUpdate.setFuelCapacity(reactorUpdateDTO.fuelCapacity()); //CHANGE FOR FUEL_CAPACITY
+//            reactorUpdate.setModeratorType(reactorUpdateDTO.moderatorType()); //CHANGE FOR MODERATOR_TYPE
+//        }
+//        return reactorUpdate;
+//    }
 
-    public Reactor updateReactor(ReactorUpdateDTO reactorUpdateDTO,int id) {
-        Reactor reactorUpdate = this.getReactorById(id);
-        if (reactorUpdate != null){
-            reactorUpdate.setReactorType(reactorUpdateDTO.getReactorType);
-            reactorUpdate.setTankCapacity(reactorUpdateDTO.getTankCapacity); //CHANGE FOR FUEL_CAPACITY
-            reactorUpdate.setNeutronFlux(reactorUpdateDTO.getNeutroFlux); //CHANGE FOR MODERATOR_TYPE
-        }
-        return reactorUpdate;
+
+    public boolean isReactorSizeAllowed(ReactorSizeDTO reactorSizeDTO){
+
+        return isAllowed;
     }
 
 }

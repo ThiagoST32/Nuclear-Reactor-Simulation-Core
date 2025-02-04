@@ -10,12 +10,19 @@ public class ReactorSizeService {
     @Autowired
     private ReactorRepository reactorRepository;
 
-    public double calculateCylinderDiameter(double internPressure, double internRay, double wallThickness) {
+    public double calculateCylinderDiameter(double internalOperatingPressure, double internRay, double wallThickness) {
+
+        /*
+            internalOperatingPressure == MPA
+            internRay == 2 / internDiameter
+            wallThickness == value
+         */
+
         double tensionInCylinder;
         try {
-            if (internPressure != 0 && internRay != 0) {
-                if (internPressure > 0 && internRay > 0) {
-                    tensionInCylinder = (internPressure * internRay) / wallThickness;
+            if (internalOperatingPressure != 0 && internRay != 0) {
+                if (internalOperatingPressure > 0 && internRay > 0) {
+                    tensionInCylinder = (internalOperatingPressure * internRay) / wallThickness;
                 } else {
                     throw new IllegalArgumentException("The values cannot be negative!!");
                 }
@@ -28,12 +35,19 @@ public class ReactorSizeService {
         return tensionInCylinder;
     }
 
-    public double calculateSpheresDiameter(double internPressure, double internRay, double wallThickness) {
+    public double calculateSpheresDiameter(double internalOperatingPressure, double internRay, double wallThickness) {
+
+        /*
+            internalOperatingPressure == MPA
+            internRay == 2 / internDiameter
+            wallThickness == value
+         */
+
         double tensionInSpheres;
         try {
-            if (internPressure != 0 && internRay != 0) {
-                if (internPressure > 0 && internRay > 0) {
-                    tensionInSpheres = (internPressure * internRay) / (2 * wallThickness);
+            if (internalOperatingPressure != 0 && internRay != 0) {
+                if (internalOperatingPressure > 0 && internRay > 0) {
+                    tensionInSpheres = (internalOperatingPressure * internRay) / (2 * wallThickness);
                 } else {
                     throw new IllegalArgumentException("The values cannot be negative!!");
                 }
@@ -44,5 +58,27 @@ public class ReactorSizeService {
             throw new RuntimeException(e);
         }
         return tensionInSpheres;
+    }
+
+    public double calculateTankCapacityPerKilo(double totalLitersTank, double productDensity) {
+        /*
+            totalLitersTank == The total liter capacity chosen by user.
+            productDensity == The density of the element required by user.
+         */
+        double totalKilo;
+        try {
+            if (totalLitersTank != 0 && productDensity != 0) {
+                if (totalLitersTank > 0 && productDensity > 0) {
+                    totalKilo = totalLitersTank * productDensity;
+                } else {
+                    throw new IllegalArgumentException("The values cannot be negative!!");
+                }
+            } else {
+                throw new IllegalArgumentException("The values cannot be zero!!");
+            }
+        } catch (IllegalArgumentException e) {
+            throw new RuntimeException(e);
+        }
+        return totalKilo;
     }
 }

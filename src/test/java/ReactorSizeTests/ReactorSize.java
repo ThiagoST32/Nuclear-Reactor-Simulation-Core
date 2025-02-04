@@ -3,35 +3,28 @@ package ReactorSizeTests;
 
 import Services.ReactorSizeService;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.jupiter.params.provider.ValueSource;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.stream.Stream;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ReactorSize {
 
-    @Autowired
-    private final ReactorSizeService reactorSizeService;
+    private ReactorSizeService reactorSizeService;
 
-    public ReactorSize(ReactorSizeService reactorSizeService) {
-        this.reactorSizeService = reactorSizeService;
+    @BeforeEach
+    public void setUp(){
+        reactorSizeService = new ReactorSizeService();
     }
 
-    @ParameterizedTest
-    @MethodSource("provideParameters")
-    public void deveCalcularCorretamenteDiametroDoCilindro(double s){
-       double teste = reactorSizeService.diameterCalculateForCylindricalVases(s, s, s);
+    @Test
+    public void deveCalcularCorretamenteDiametroDoCilindro(){
+       double teste = reactorSizeService.calculateCylinderDiameter(48, 24 ,0.1);
         Assertions.assertEquals(14000, teste);
     }
 
-    private static Stream<Arguments> provideParameters() {
-        return Stream.of(
-                Arguments.of(56.0),
-                Arguments.of(28.0),
-                Arguments.of(0.1)
-        );
+    @Test
+    public void deveCalcularCorretamenteDiametroDeEsferios(){
+        double teste = reactorSizeService.calculateSpheresDiameter(-1, 24, 0.1);
+        Assertions.assertEquals(5760, teste);
     }
+
 }

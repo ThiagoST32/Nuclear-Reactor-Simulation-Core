@@ -1,7 +1,6 @@
-package Repository;
+package com.projeto.simulacao.FissaoNuclear.Repository;
 
-import DTO.ReactorSizeDTO;
-import Models.ReactorSize;
+import com.projeto.simulacao.FissaoNuclear.Models.ReactorSize;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ReactorSizeRepository extends JpaRepository<ReactorSize, Integer> {

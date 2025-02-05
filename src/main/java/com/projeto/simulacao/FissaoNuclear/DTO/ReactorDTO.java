@@ -1,6 +1,6 @@
-package DTO;
+package com.projeto.simulacao.FissaoNuclear.DTO;
 
-import Models.ReactorSize;
+import com.projeto.simulacao.FissaoNuclear.Models.ReactorSize;
 
 public record ReactorDTO(String reactorType, double maxTemperature, double maxPressure, double fuelCapacity, String moderatorType, ReactorSize reactorSize) {
 }

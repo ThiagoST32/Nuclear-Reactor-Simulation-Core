@@ -1,0 +1,63 @@
+package com.projeto.simulacao.FissaoNuclear.Models;
+
+
+import com.projeto.simulacao.FissaoNuclear.DTO.ReactorDTO;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+public class Reactor {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    /*
+
+        PWR == Pressurized water reactors (PWR), uses water as a coolant.
+
+        BWR == Boiling water reactors (BWR), uses water as a coolant.
+               Have bottom-entry control roods that can be inserted without removing control rod drives.
+
+        FBRs == Fast Breeders, uses liquid metal like sodium as a coolant.
+                Are very expansive.
+                Can generate more nuclear fuel than they consume.
+                Have a core of plutonium surrounded by Uranium-238 rods.
+                Are not equipped with moderator to slow down neutrons.
+                Use fast neutrons to create more nuclear fuel than they consume.
+                The fuel cycle is close because the reactor "breeds" its own fuel.
+     */
+
+
+    private String reactorType; //Ex: PWR, BWR, Fast Breeder
+
+    private double maxTemperature; //Em Kelvin
+
+    private double maxPressure; //Em MPa
+
+    private double fuelCapacity; //Em kg
+
+    private String moderatorType; //Ex: light water, graphite
+
+    private ReactorSize reactorSize;
+
+
+    public Reactor(ReactorDTO reactorDTO){
+        this.reactorType = reactorDTO.reactorType();
+        this.maxTemperature = reactorDTO.maxTemperature();
+        this.maxPressure = reactorDTO.maxPressure();
+        this.fuelCapacity = reactorDTO.fuelCapacity();
+        this.moderatorType = reactorDTO.moderatorType();
+        this.reactorSize = reactorDTO.reactorSize();
+    }
+
+}

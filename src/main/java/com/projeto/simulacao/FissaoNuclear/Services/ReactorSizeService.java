@@ -1,6 +1,6 @@
-package Services;
+package com.projeto.simulacao.FissaoNuclear.Services;
 
-import Repository.ReactorRepository;
+import com.projeto.simulacao.FissaoNuclear.Repository.ReactorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,7 +1,7 @@
 package ReactorSizeTests;
 
 
-import Services.ReactorSizeService;
+import com.projeto.simulacao.FissaoNuclear.Services.ReactorSizeService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

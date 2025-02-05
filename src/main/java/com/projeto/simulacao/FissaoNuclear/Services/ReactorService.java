@@ -1,11 +1,9 @@
-package Services;
+package com.projeto.simulacao.FissaoNuclear.Services;
 
-import DTO.ReactorDTO;
-import DTO.ReactorSizeDTO;
-import DTO.UpdateDTOS.ReactorUpdateDTO;
-import Models.Reactor;
-import Repository.ReactorRepository;
-import jakarta.transaction.Transactional;
+import com.projeto.simulacao.FissaoNuclear.DTO.ReactorDTO;
+import com.projeto.simulacao.FissaoNuclear.DTO.ReactorSizeDTO;
+import com.projeto.simulacao.FissaoNuclear.Models.Reactor;
+import com.projeto.simulacao.FissaoNuclear.Repository.ReactorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,11 +15,16 @@ public class ReactorService {
     @Autowired
     private ReactorRepository reactorRepository;
 
-    private boolean isAllowed = false;
+    @Autowired
+    private ReactorSizeService reactorSizeService;
+
+    private boolean isAllowed;
 
     public Reactor createReactor(ReactorDTO reactorDTO){
         Reactor newReactor = new Reactor(reactorDTO);
-        this.saveReactor(newReactor);
+        if (isAllowed){
+            this.saveReactor(newReactor);
+        }
         return newReactor;
     }
 
@@ -54,7 +57,7 @@ public class ReactorService {
 
 
     public boolean isReactorSizeAllowed(ReactorSizeDTO reactorSizeDTO){
-
+        reactorSizeService.calculateCylinderDiameter(reactorSizeDTO.diameter(), reactorSizeDTO.radius(), reactorSizeDTO.wallThickness());
         return isAllowed;
     }
 

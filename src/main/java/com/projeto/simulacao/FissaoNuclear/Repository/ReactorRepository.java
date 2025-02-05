@@ -1,6 +1,6 @@
-package Repository;
+package com.projeto.simulacao.FissaoNuclear.Repository;
 
-import Models.Reactor;
+import com.projeto.simulacao.FissaoNuclear.Models.Reactor;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

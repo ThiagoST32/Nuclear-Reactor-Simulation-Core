@@ -1,4 +1,4 @@
-package Models;
+package com.projeto.simulacao.FissaoNuclear.Models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

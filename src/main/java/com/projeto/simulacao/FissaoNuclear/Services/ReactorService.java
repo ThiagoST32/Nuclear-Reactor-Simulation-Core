@@ -22,9 +22,10 @@ public class ReactorService {
 
     public Reactor createReactor(ReactorDTO reactorDTO){
         Reactor newReactor = new Reactor(reactorDTO);
-        if (isAllowed){
-            this.saveReactor(newReactor);
-        }
+//        if (isAllowed){
+//            this.saveReactor(newReactor);
+//        }
+        this.saveReactor(newReactor);
         return newReactor;
     }
 
@@ -33,6 +34,7 @@ public class ReactorService {
     }
 
     public List<Reactor> getAllReactors(){
+        System.out.println(this.reactorRepository.findAll().isEmpty());
         return this.reactorRepository.findAll();
     }
 

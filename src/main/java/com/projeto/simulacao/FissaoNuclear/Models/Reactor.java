@@ -2,10 +2,8 @@ package com.projeto.simulacao.FissaoNuclear.Models;
 
 
 import com.projeto.simulacao.FissaoNuclear.DTO.ReactorDTO;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.projeto.simulacao.FissaoNuclear.DTO.ReactorSizeDTO;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -48,6 +46,8 @@ public class Reactor {
 
     private String moderatorType; //Ex: light water, graphite
 
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "reactor_size_id")
     private ReactorSize reactorSize;
 
 
@@ -57,7 +57,14 @@ public class Reactor {
         this.maxPressure = reactorDTO.maxPressure();
         this.fuelCapacity = reactorDTO.fuelCapacity();
         this.moderatorType = reactorDTO.moderatorType();
-        this.reactorSize = reactorDTO.reactorSize();
+        ReactorSizeDTO sizeDTO = reactorDTO.reactorSize();
+        this.reactorSize = new ReactorSize(
+                sizeDTO.diameter(),
+                sizeDTO.radius(),
+                sizeDTO.totalSize(),
+                sizeDTO.wallThickness()
+        );
+
     }
 
 }

@@ -24,14 +24,16 @@ public class ReactorController {
     @Autowired
     private ReactorService reactorService;
 
-    @PostMapping
-    public ResponseEntity<Reactor> createReactor(@RequestBody @Validated ReactorDTO reactorDTO){
+    @PostMapping("/create")
+    public ResponseEntity<Reactor> createReactor(@RequestBody ReactorDTO reactorDTO){
         log.info("Creating Reactor!!!");
         Reactor newReactor = reactorService.createReactor(reactorDTO);
+        System.out.println(newReactor);
+        System.out.println(reactorDTO);
         return new ResponseEntity<>(newReactor, HttpStatus.CREATED);
     }
 
-    @GetMapping
+    @GetMapping("/getAll")
     public ResponseEntity<List<Reactor>> getAllReactors(){
         log.info("Getting all reactors!!!");
         List<Reactor> reactors = reactorService.getAllReactors();

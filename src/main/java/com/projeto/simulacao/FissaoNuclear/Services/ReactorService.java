@@ -59,7 +59,7 @@ public class ReactorService {
 
 
     public boolean isReactorSizeAllowed(ReactorSizeDTO reactorSizeDTO){
-        reactorSizeService.calculateCylinderDiameter(reactorSizeDTO.diameter(), reactorSizeDTO.radius(), reactorSizeDTO.wallThickness());
+        reactorSizeService.calculateCylinderStress(reactorSizeDTO.diameter(), reactorSizeDTO.radius(), reactorSizeDTO.wallThickness());
         return isAllowed;
     }
 

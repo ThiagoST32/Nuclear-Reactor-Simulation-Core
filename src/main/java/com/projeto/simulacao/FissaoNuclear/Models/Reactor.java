@@ -4,16 +4,14 @@ package com.projeto.simulacao.FissaoNuclear.Models;
 import com.projeto.simulacao.FissaoNuclear.DTO.ReactorDTO;
 import com.projeto.simulacao.FissaoNuclear.DTO.ReactorSizeDTO;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-@Entity
-@NoArgsConstructor
-@AllArgsConstructor
+@Entity(name = "reactor")
+@Table(name = "reactor")
 @Getter
 @Setter
+@AllArgsConstructor
+@EqualsAndHashCode(of = "id")
 public class Reactor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -67,4 +65,6 @@ public class Reactor {
 
     }
 
+    public Reactor() {
+    }
 }

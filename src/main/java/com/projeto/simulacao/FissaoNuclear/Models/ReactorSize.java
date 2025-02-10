@@ -1,19 +1,17 @@
 package com.projeto.simulacao.FissaoNuclear.Models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.projeto.simulacao.FissaoNuclear.DTO.ReactorSizeDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
-@Table
-@Setter
-@Getter
-@NoArgsConstructor
+@Entity(name = "reactor_size")
+@Table(name = "reactor_size")
 @AllArgsConstructor
+@Getter
+@Setter
 public class ReactorSize {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,5 +34,8 @@ public class ReactorSize {
         this.diameter = diameter;
         this.radius = radius;
         this.wallThickness = wallThickness;
+    }
+
+    public ReactorSize() {
     }
 }

@@ -3,15 +3,10 @@ package com.projeto.simulacao.FissaoNuclear.Models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity(name = "reactor_size")
 @Table(name = "reactor_size")
 @AllArgsConstructor
-@Getter
-@Setter
 public class ReactorSize {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,5 +32,53 @@ public class ReactorSize {
     }
 
     public ReactorSize() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public double getTotalSize() {
+        return totalSize;
+    }
+
+    public void setTotalSize(double totalSize) {
+        this.totalSize = totalSize;
+    }
+
+    public double getDiameter() {
+        return diameter;
+    }
+
+    public void setDiameter(double diameter) {
+        this.diameter = diameter;
+    }
+
+    public double getRadius() {
+        return radius;
+    }
+
+    public void setRadius(double radius) {
+        this.radius = radius;
+    }
+
+    public double getWallThickness() {
+        return wallThickness;
+    }
+
+    public void setWallThickness(double wallThickness) {
+        this.wallThickness = wallThickness;
+    }
+
+    public Reactor getReactor() {
+        return reactor;
+    }
+
+    public void setReactor(Reactor reactor) {
+        this.reactor = reactor;
     }
 }

@@ -2,7 +2,9 @@ package com.projeto.simulacao.FissaoNuclear.Services;
 
 import com.projeto.simulacao.FissaoNuclear.DTO.ReactorDTO;
 import com.projeto.simulacao.FissaoNuclear.DTO.ReactorSizeDTO;
+import com.projeto.simulacao.FissaoNuclear.Models.ChemicalElement;
 import com.projeto.simulacao.FissaoNuclear.Models.Reactor;
+import com.projeto.simulacao.FissaoNuclear.Repository.ChemicalElementRepository;
 import com.projeto.simulacao.FissaoNuclear.Repository.ReactorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,12 +18,17 @@ public class ReactorService {
     private ReactorRepository reactorRepository;
 
     @Autowired
+    private ChemicalElementRepository chemicalElementRepository;
+
+    @Autowired
     private ReactorSizeService reactorSizeService;
 
     private boolean isAllowed;
 
     public Reactor createReactor(ReactorDTO reactorDTO){
         Reactor newReactor = new Reactor(reactorDTO);
+        //newReactor.setChemicalElement(this.getChemicalByName(reactorDTO.idChemicalElement()));
+        System.out.println(newReactor.getChemicalElement());
 //        if (isAllowed){
 //            this.saveReactor(newReactor);
 //        }
@@ -41,6 +48,10 @@ public class ReactorService {
     public Reactor getReactorById(int id){
         return this.reactorRepository.findById(id).orElseThrow(() -> new RuntimeException("Reactor not Found!!"));
     }
+
+    /*public ChemicalElement getChemicalByName(ChemicalElement nameChemical){
+        return this.chemicalElementRepository.findChemicalByName(nameChemical.getName());
+    }*/
 
 //    @Transactional
 //    public void deleteReactorById(int id){

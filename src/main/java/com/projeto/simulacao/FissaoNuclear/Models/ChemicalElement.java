@@ -5,10 +5,10 @@ import com.projeto.simulacao.FissaoNuclear.DTO.ChemicalElementDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity(name = "chemical_element")
 @Table(name = "chemical_element")
-@Getter
-@Setter
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class ChemicalElement {
@@ -31,7 +31,7 @@ public class ChemicalElement {
     private int atomicNumber;
 
     @Column(nullable = false)
-    private int density;
+    private int density; //In g/cm
 
     @Column(nullable = false)
     private int massAtomic;
@@ -42,12 +42,13 @@ public class ChemicalElement {
     @Column(nullable = false)
     private int boilingPoint;
 
-    @OneToOne(mappedBy = "chemicalElement")
-    @JsonIgnore
-    private Reactor reactor;
+    @OneToMany(mappedBy = "chemicalElement")
+    private List<Reactor> reactors;
 
     public ChemicalElement(ChemicalElementDTO chemicalElementDTO) {
+        this.name = chemicalElementDTO.name();
         this.symbol = chemicalElementDTO.symbol();
+        this.density = chemicalElementDTO.density();
         this.atomicNumber = chemicalElementDTO.atomicNumber();
         this.massAtomic = chemicalElementDTO.massAtomic();
         this.meltingPoint = chemicalElementDTO.meltingPoint();
@@ -57,5 +58,78 @@ public class ChemicalElement {
     public ChemicalElement() {
     }
 
+    @Override
+    public String toString() {
+        return "ChemicalElement{" +
+                "id=" + id +
+                ", symbol=" + symbol +
+                ", name='" + name + '\'' +
+                ", atomicNumber=" + atomicNumber +
+                ", density=" + density +
+                ", massAtomic=" + massAtomic +
+                ", meltingPoint=" + meltingPoint +
+                ", boilingPoint=" + boilingPoint +
+                '}';
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public Character getSymbol() {
+        return symbol;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAtomicNumber() {
+        return atomicNumber;
+    }
+
+    public int getDensity() {
+        return density;
+    }
+
+    public int getMassAtomic() {
+        return massAtomic;
+    }
+
+    public int getMeltingPoint() {
+        return meltingPoint;
+    }
+
+    public int getBoilingPoint() {
+        return boilingPoint;
+    }
+
+    public void setSymbol(Character symbol) {
+        this.symbol = symbol;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAtomicNumber(int atomicNumber) {
+        this.atomicNumber = atomicNumber;
+    }
+
+    public void setDensity(int density) {
+        this.density = density;
+    }
+
+    public void setMassAtomic(int massAtomic) {
+        this.massAtomic = massAtomic;
+    }
+
+    public void setMeltingPoint(int meltingPoint) {
+        this.meltingPoint = meltingPoint;
+    }
+
+    public void setBoilingPoint(int boilingPoint) {
+        this.boilingPoint = boilingPoint;
+    }
 
 }

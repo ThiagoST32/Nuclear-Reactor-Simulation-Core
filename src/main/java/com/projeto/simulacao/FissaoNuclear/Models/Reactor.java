@@ -8,8 +8,6 @@ import lombok.*;
 
 @Entity(name = "reactor")
 @Table(name = "reactor")
-@Getter
-@Setter
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class Reactor {
@@ -40,7 +38,7 @@ public class Reactor {
 
     private double maxPressure; //Em MPa
 
-    private double coreMaxVolume;
+    private double coreMaxVolume; //Em Liters
 
     private double fuelCapacity; //Em kg
 
@@ -50,8 +48,8 @@ public class Reactor {
     @JoinColumn(name = "reactor_size_id")
     private ReactorSize reactorSize;
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "chemical_element_id")
+    @ManyToOne
+    @JoinColumn(name = "chemical_element_id", referencedColumnName = "id")
     private ChemicalElement chemicalElement;
 
 
@@ -73,6 +71,93 @@ public class Reactor {
 
     }
 
+    @Override
+    public String toString() {
+        return "Reactor{" +
+                "id=" + id +
+                ", reactorType='" + reactorType + '\'' +
+                ", maxTemperature=" + maxTemperature +
+                ", maxPressure=" + maxPressure +
+                ", coreMaxVolume=" + coreMaxVolume +
+                ", fuelCapacity=" + fuelCapacity +
+                ", moderatorType='" + moderatorType + '\'' +
+                ", reactorSize=" + reactorSize +
+                ", chemicalElement=" + chemicalElement +
+                '}';
+    }
+
     public Reactor() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getReactorType() {
+        return reactorType;
+    }
+
+    public void setReactorType(String reactorType) {
+        this.reactorType = reactorType;
+    }
+
+    public double getMaxTemperature() {
+        return maxTemperature;
+    }
+
+    public void setMaxTemperature(double maxTemperature) {
+        this.maxTemperature = maxTemperature;
+    }
+
+    public double getMaxPressure() {
+        return maxPressure;
+    }
+
+    public void setMaxPressure(double maxPressure) {
+        this.maxPressure = maxPressure;
+    }
+
+    public double getCoreMaxVolume() {
+        return coreMaxVolume;
+    }
+
+    public void setCoreMaxVolume(double coreMaxVolume) {
+        this.coreMaxVolume = coreMaxVolume;
+    }
+
+    public double getFuelCapacity() {
+        return fuelCapacity;
+    }
+
+    public void setFuelCapacity(double fuelCapacity) {
+        this.fuelCapacity = fuelCapacity;
+    }
+
+    public String getModeratorType() {
+        return moderatorType;
+    }
+
+    public void setModeratorType(String moderatorType) {
+        this.moderatorType = moderatorType;
+    }
+
+    public ReactorSize getReactorSize() {
+        return reactorSize;
+    }
+
+    public void setReactorSize(ReactorSize reactorSize) {
+        this.reactorSize = reactorSize;
+    }
+
+    public ChemicalElement getChemicalElement() {
+        return chemicalElement;
+    }
+
+    public void setChemicalElement(ChemicalElement chemicalElement) {
+        this.chemicalElement = chemicalElement;
     }
 }

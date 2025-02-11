@@ -40,6 +40,8 @@ public class Reactor {
 
     private double maxPressure; //Em MPa
 
+    private double coreMaxVolume;
+
     private double fuelCapacity; //Em kg
 
     private String moderatorType; //Ex: light water, graphite
@@ -48,11 +50,16 @@ public class Reactor {
     @JoinColumn(name = "reactor_size_id")
     private ReactorSize reactorSize;
 
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "chemical_element_id")
+    private ChemicalElement chemicalElement;
+
 
     public Reactor(ReactorDTO reactorDTO){
         this.reactorType = reactorDTO.reactorType();
         this.maxTemperature = reactorDTO.maxTemperature();
         this.maxPressure = reactorDTO.maxPressure();
+        this.coreMaxVolume = reactorDTO.coreMaxVolume();
         this.fuelCapacity = reactorDTO.fuelCapacity();
         this.moderatorType = reactorDTO.moderatorType();
         ReactorSizeDTO sizeDTO = reactorDTO.reactorSize();
@@ -62,6 +69,7 @@ public class Reactor {
                 sizeDTO.totalSize(),
                 sizeDTO.wallThickness()
         );
+        this.chemicalElement = reactorDTO.idChemicalElement();
 
     }
 

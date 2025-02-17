@@ -17,21 +17,21 @@ public class ReactorSize {
 
     @Test
     public void deveCalcularCorretamenteDiametroDoCilindro(){
-       double teste = reactorSizeService.calculateCylinderDiameter(10, 0.11 ,0.01);
+       double teste = reactorSizeService.calculateCylinderStress(10, 0.11 ,0.01);
         Assertions.assertEquals(110, teste);
         System.out.println(teste);
     }
 
     @Test
     public void deveCalcularCorretamenteDiametroDeEsferios(){
-        double teste = reactorSizeService.calculateSpheresDiameter(10, 0.11, 0.01);
+        double teste = reactorSizeService.calculateSphereStress(10, 0.11, 0.01);
         Assertions.assertEquals(55, teste);
         System.out.println(teste);
     }
 
     @Test
     public void deveCalcularCapacidadeDoTanqueEmKilos(){
-        double teste = reactorSizeService.calculateTankCapacityPerKilo(100, 0.76);
+        double teste = reactorSizeService.calculateTankCapacity(100, 0.76);
         System.out.println(teste);
         Assertions.assertEquals(76, teste);
     }

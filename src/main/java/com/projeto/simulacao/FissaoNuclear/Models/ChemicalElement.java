@@ -1,20 +1,16 @@
 package com.projeto.simulacao.FissaoNuclear.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.projeto.simulacao.FissaoNuclear.DTO.ChemicalElementDTO;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
 
-@Entity
-@Getter
-@Setter
+import java.util.List;
+
+@Entity(name = "chemical_element")
+@Table(name = "chemical_element")
 @AllArgsConstructor
-@NoArgsConstructor
+@EqualsAndHashCode(of = "id")
 public class ChemicalElement {
 //    URANIUM_235("U", 92, 238.02891, 1132.2, 3900),
 //    KRYPTON_92("K",32, 83.798,  -157.36, -153.22),
@@ -24,18 +20,116 @@ public class ChemicalElement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String symbol;
-    private int atomicNumber;
-    private double massAtomic;
-    private double meltingPoint;
-    private double boilingPoint;
 
-    public ChemicalElement(ChemicalElementDTO chemicalElementDTO){
+    @Column(unique = true, nullable = false, length = 2)
+    private Character symbol;
+
+    @Column(unique = true, nullable = false, name = "chemical_name")
+    private String name;
+
+    @Column(nullable = false)
+    private int atomicNumber;
+
+    @Column(nullable = false)
+    private int density; //In g/cm
+
+    @Column(nullable = false)
+    private int massAtomic;
+
+    @Column(nullable = false)
+    private int meltingPoint;
+
+    @Column(nullable = false)
+    private int boilingPoint;
+
+    @OneToMany(mappedBy = "chemicalElement")
+    private List<Reactor> reactors;
+
+    public ChemicalElement(ChemicalElementDTO chemicalElementDTO) {
+        this.name = chemicalElementDTO.name();
         this.symbol = chemicalElementDTO.symbol();
+        this.density = chemicalElementDTO.density();
         this.atomicNumber = chemicalElementDTO.atomicNumber();
         this.massAtomic = chemicalElementDTO.massAtomic();
         this.meltingPoint = chemicalElementDTO.meltingPoint();
         this.boilingPoint = chemicalElementDTO.boilingPoint();
+    }
+
+    public ChemicalElement() {
+    }
+
+    @Override
+    public String toString() {
+        return "ChemicalElement{" +
+                "id=" + id +
+                ", symbol=" + symbol +
+                ", name='" + name + '\'' +
+                ", atomicNumber=" + atomicNumber +
+                ", density=" + density +
+                ", massAtomic=" + massAtomic +
+                ", meltingPoint=" + meltingPoint +
+                ", boilingPoint=" + boilingPoint +
+                '}';
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public Character getSymbol() {
+        return symbol;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAtomicNumber() {
+        return atomicNumber;
+    }
+
+    public int getDensity() {
+        return density;
+    }
+
+    public int getMassAtomic() {
+        return massAtomic;
+    }
+
+    public int getMeltingPoint() {
+        return meltingPoint;
+    }
+
+    public int getBoilingPoint() {
+        return boilingPoint;
+    }
+
+    public void setSymbol(Character symbol) {
+        this.symbol = symbol;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAtomicNumber(int atomicNumber) {
+        this.atomicNumber = atomicNumber;
+    }
+
+    public void setDensity(int density) {
+        this.density = density;
+    }
+
+    public void setMassAtomic(int massAtomic) {
+        this.massAtomic = massAtomic;
+    }
+
+    public void setMeltingPoint(int meltingPoint) {
+        this.meltingPoint = meltingPoint;
+    }
+
+    public void setBoilingPoint(int boilingPoint) {
+        this.boilingPoint = boilingPoint;
     }
 
 }

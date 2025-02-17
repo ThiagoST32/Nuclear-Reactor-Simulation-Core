@@ -10,75 +10,39 @@ public class ReactorSizeService {
     @Autowired
     private ReactorRepository reactorRepository;
 
-    public double calculateCylinderDiameter(double internalOperatingPressure, double internRay, double wallThickness) {
+    private static final String POSITIVE_NON_ZERO = "THE VALUES CANNOT BE ZERO!!!";
+    private static final String NEGATIVE_NUMBER = "THE VALUE CANNOT BE NEGATIVE!!!";
 
-        /*
-            internalOperatingPressure == MPA
-            internRay == 2 / internDiameter
-            wallThickness == value
-         */
 
-        double tensionInCylinder;
-        try {
-            if (internalOperatingPressure != 0 && internRay != 0) {
-                if (internalOperatingPressure > 0 && internRay > 0) {
-                    tensionInCylinder = (internalOperatingPressure * internRay) / wallThickness;
-                } else {
-                    throw new IllegalArgumentException("The values cannot be negative!!");
-                }
-            } else {
-                throw new IllegalArgumentException("The values cannot be zero!!");
+    //Example of maximum endured stress constant
+    private static final double MAX_CYLINDER_STAINLESS_STEEL_STRESS = 150;
+    private static final double MAX_SPHERE_STAINLESS_STEEL_STRESS = 150;
+
+    public void validatePositiveNonZero(double... values) {
+        for (double value : values) {
+            if (value == 0) {
+                throw new IllegalArgumentException(POSITIVE_NON_ZERO);
+            } else if (value < 0) {
+                throw new IllegalArgumentException(NEGATIVE_NUMBER);
             }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
         }
-        return tensionInCylinder;
     }
 
-    public double calculateSpheresDiameter(double internalOperatingPressure, double internRay, double wallThickness) {
-
-        /*
-            internalOperatingPressure == MPA
-            internRay == 2 / internDiameter
-            wallThickness == value
-         */
-
-        double tensionInSpheres;
-        try {
-            if (internalOperatingPressure != 0 && internRay != 0) {
-                if (internalOperatingPressure > 0 && internRay > 0) {
-                    tensionInSpheres = (internalOperatingPressure * internRay) / (2 * wallThickness);
-                } else {
-                    throw new IllegalArgumentException("The values cannot be negative!!");
-                }
-            } else {
-                throw new IllegalArgumentException("The values cannot be zero!!");
-            }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        return tensionInSpheres;
+    public double calculateCylinderStress(double internalOperatingPressure, double internRay, double wallThickness) {
+        // internalOperatingPressure == MPA ----- internRay == 2 / internDiameter ----- wallThickness == value
+        validatePositiveNonZero(internalOperatingPressure, internRay, wallThickness);
+        return (internalOperatingPressure * internRay) / wallThickness;
     }
 
-    public double calculateTankCapacityPerKilo(double totalLitersTank, double productDensity) {
-        /*
-            totalLitersTank == The total liter capacity chosen by user.
-            productDensity == The density of the element required by user.
-         */
-        double totalKilo;
-        try {
-            if (totalLitersTank != 0 && productDensity != 0) {
-                if (totalLitersTank > 0 && productDensity > 0) {
-                    totalKilo = totalLitersTank * productDensity;
-                } else {
-                    throw new IllegalArgumentException("The values cannot be negative!!");
-                }
-            } else {
-                throw new IllegalArgumentException("The values cannot be zero!!");
-            }
-        } catch (IllegalArgumentException e) {
-            throw new RuntimeException(e);
-        }
-        return totalKilo;
+    public double calculateSphereStress(double internalOperatingPressure, double internRay, double wallThickness) {
+        //internalOperatingPressure == MPA ----- internRay == 2 / internDiameter ----- wallThickness == value
+        validatePositiveNonZero(internalOperatingPressure, internRay, wallThickness);
+        return (internalOperatingPressure * internRay) / (2 * wallThickness);
+    }
+
+    public double calculateTankCapacity(double totalLitersTank, double productDensity) {
+        //totalLitersTank == The total liter capacity chosen by user ----- productDensity == The density of the element required by user.
+        validatePositiveNonZero(totalLitersTank, productDensity);
+        return totalLitersTank * productDensity;
     }
 }

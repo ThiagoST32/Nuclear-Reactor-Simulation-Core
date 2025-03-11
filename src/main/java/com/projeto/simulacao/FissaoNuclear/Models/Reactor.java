@@ -49,11 +49,11 @@ public class Reactor {
     private ReactorSize reactorSize;
 
     @ManyToOne
-    @JoinColumn(name = "chemical_element_id", referencedColumnName = "id")
+    @JoinColumn(name = "chemical_element_id", referencedColumnName = "chemical_name")
     private ChemicalElement chemicalElement;
 
 
-    public Reactor(ReactorDTO reactorDTO){
+    public Reactor(ReactorDTO reactorDTO, ChemicalElement chemicalElementReceive){
         this.reactorType = reactorDTO.reactorType();
         this.maxTemperature = reactorDTO.maxTemperature();
         this.maxPressure = reactorDTO.maxPressure();
@@ -67,23 +67,15 @@ public class Reactor {
                 sizeDTO.totalSize(),
                 sizeDTO.wallThickness()
         );
-        this.chemicalElement = reactorDTO.idChemicalElement();
-
-    }
-
-    @Override
-    public String toString() {
-        return "Reactor{" +
-                "id=" + id +
-                ", reactorType='" + reactorType + '\'' +
-                ", maxTemperature=" + maxTemperature +
-                ", maxPressure=" + maxPressure +
-                ", coreMaxVolume=" + coreMaxVolume +
-                ", fuelCapacity=" + fuelCapacity +
-                ", moderatorType='" + moderatorType + '\'' +
-                ", reactorSize=" + reactorSize +
-                ", chemicalElement=" + chemicalElement +
-                '}';
+        this.chemicalElement = new ChemicalElement(
+                chemicalElementReceive.getSymbol(),
+                chemicalElementReceive.getName(),
+                chemicalElementReceive.getAtomicNumber(),
+                chemicalElementReceive.getBoilingPoint(),
+                chemicalElementReceive.getDensity(),
+                chemicalElementReceive.getMassAtomic(),
+                chemicalElementReceive.getMeltingPoint()
+        );
     }
 
     public Reactor() {

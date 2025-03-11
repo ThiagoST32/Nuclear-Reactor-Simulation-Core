@@ -55,22 +55,19 @@ public class ChemicalElement {
         this.boilingPoint = chemicalElementDTO.boilingPoint();
     }
 
+    public ChemicalElement(Character symbol, String name, int atomicNumber, int density, int massAtomic, int meltingPoint, int boilingPoint) {
+        this.symbol = symbol;
+        this.name = name;
+        this.atomicNumber = atomicNumber;
+        this.density = density;
+        this.massAtomic = massAtomic;
+        this.meltingPoint = meltingPoint;
+        this.boilingPoint = boilingPoint;
+    }
+
     public ChemicalElement() {
     }
 
-    @Override
-    public String toString() {
-        return "ChemicalElement{" +
-                "id=" + id +
-                ", symbol=" + symbol +
-                ", name='" + name + '\'' +
-                ", atomicNumber=" + atomicNumber +
-                ", density=" + density +
-                ", massAtomic=" + massAtomic +
-                ", meltingPoint=" + meltingPoint +
-                ", boilingPoint=" + boilingPoint +
-                '}';
-    }
 
     public int getId() {
         return id;

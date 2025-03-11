@@ -60,22 +60,13 @@ public class ReactorController {
 
     @PostMapping("/create")
     public ResponseEntity<Reactor> createReactor(@RequestBody ReactorDTO reactorDTO){
-        log.info("Creating Reactor!!!");
-        //this.reactorService.getChemicalByName(reactorDTO.idChemicalElement());
         Reactor newReactor = reactorService.createReactor(reactorDTO);
-        System.out.println(newReactor.getChemicalElement());
-        System.out.println(reactorDTO.idChemicalElement());
         return new ResponseEntity<>(newReactor, HttpStatus.CREATED);
     }
 
     @PostMapping("/chemicalElement")
     public ResponseEntity<ChemicalElement> registerElement(@RequestBody ChemicalElementDTO chemicalElementDTO){
-        log.info("Saving Chemical Element");
-        log.warn("DTO");
-        System.out.println(chemicalElementDTO);
-        log.warn("DTO");
         ChemicalElement saveElement = this.chemicalElementService.chemicalInsertDB(chemicalElementDTO);
-        log.warn("saved!");
         return new ResponseEntity<>(saveElement, HttpStatus.CREATED);
     }
 

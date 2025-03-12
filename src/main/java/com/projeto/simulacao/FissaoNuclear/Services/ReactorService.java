@@ -26,7 +26,8 @@ public class ReactorService {
     private boolean isAllowed;
 
     public Reactor createReactor(ReactorDTO reactorDTO){
-        ChemicalElement chemicalElement = this.chemicalElementRepository.findChemicalByName(String.valueOf(reactorDTO.chemicalElement()));
+        //ChemicalElement chemicalElement = this.chemicalElementRepository.findChemicalByName(String.valueOf(reactorDTO.chemicalElement()));
+        ChemicalElement chemicalElement = new ChemicalElement();
         Reactor newReactor = new Reactor(reactorDTO, chemicalElement);
         this.saveReactor(newReactor);
         return newReactor;

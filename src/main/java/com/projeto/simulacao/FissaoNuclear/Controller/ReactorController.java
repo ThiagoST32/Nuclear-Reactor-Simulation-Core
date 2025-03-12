@@ -72,8 +72,13 @@ public class ReactorController {
 
     @GetMapping("/getAll")
     public ResponseEntity<List<Reactor>> getAllReactors(){
-        log.info("Getting all reactors!!!");
         List<Reactor> reactors = reactorService.getAllReactors();
         return new ResponseEntity<>(reactors, HttpStatus.OK);
+    }
+
+    @GetMapping("/teste/{name}")
+    public ResponseEntity<Boolean> checkIfExistChemicalElement(@PathVariable String name){
+        boolean checkElement = this.chemicalElementService.testeNameChemical(name);
+        return new ResponseEntity<>(checkElement, HttpStatus.ACCEPTED);
     }
 }

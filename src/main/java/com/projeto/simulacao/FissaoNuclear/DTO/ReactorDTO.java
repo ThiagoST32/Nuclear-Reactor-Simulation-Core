@@ -1,7 +1,7 @@
 package com.projeto.simulacao.FissaoNuclear.DTO;
 
+
 import com.projeto.simulacao.FissaoNuclear.Models.ChemicalElement;
-import com.projeto.simulacao.FissaoNuclear.Models.ReactorSize;
 
 public record ReactorDTO(
         String reactorType,
@@ -11,5 +11,5 @@ public record ReactorDTO(
         double fuelCapacity,
         String moderatorType,
         ReactorSizeDTO reactorSize,
-        ChemicalElement idChemicalElement) {
+        ChemicalElement chemicalElement) {
 }

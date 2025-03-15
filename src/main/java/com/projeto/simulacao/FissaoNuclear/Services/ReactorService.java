@@ -26,12 +26,9 @@ public class ReactorService {
     private boolean isAllowed;
 
     public Reactor createReactor(ReactorDTO reactorDTO){
-        Reactor newReactor = new Reactor(reactorDTO);
-        //newReactor.setChemicalElement(this.getChemicalByName(reactorDTO.idChemicalElement()));
-        System.out.println(newReactor.getChemicalElement());
-//        if (isAllowed){
-//            this.saveReactor(newReactor);
-//        }
+        //ChemicalElement chemicalElement = this.chemicalElementRepository.findChemicalByName(String.valueOf(reactorDTO.chemicalElement()));
+        ChemicalElement chemicalElement = new ChemicalElement();
+        Reactor newReactor = new Reactor(reactorDTO, chemicalElement);
         this.saveReactor(newReactor);
         return newReactor;
     }
@@ -41,12 +38,11 @@ public class ReactorService {
     }
 
     public List<Reactor> getAllReactors(){
-        System.out.println(this.reactorRepository.findAll().isEmpty());
         return this.reactorRepository.findAll();
     }
 
     public Reactor getReactorById(int id){
-        return this.reactorRepository.findById(id).orElseThrow(() -> new RuntimeException("Reactor not Found!!"));
+        return this.reactorRepository.findById(id).orElseThrow(RuntimeException::new);
     }
 
     /*public ChemicalElement getChemicalByName(ChemicalElement nameChemical){

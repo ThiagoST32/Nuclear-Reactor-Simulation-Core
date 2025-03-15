@@ -19,9 +19,9 @@ desc reactor;
 
 
 select * from reactor;
-select * from reactor_size;
-SELECT * FROM chemical_element;
-truncate chemical_element;
+select * from reactorsize;
+SELECT * FROM chemicalelement;
+truncate chemicalelement;
 
 SELECT * FROM eventlog;
 SELECT * FROM reactor;

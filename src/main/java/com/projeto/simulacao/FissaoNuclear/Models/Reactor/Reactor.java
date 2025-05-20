@@ -1,8 +1,11 @@
-package com.projeto.simulacao.FissaoNuclear.Models;
+package com.projeto.simulacao.FissaoNuclear.Models.Reactor;
 
 
 import com.projeto.simulacao.FissaoNuclear.DTO.ReactorDTO;
 import com.projeto.simulacao.FissaoNuclear.DTO.ReactorSizeDTO;
+import com.projeto.simulacao.FissaoNuclear.Models.ChemicalElement.ChemicalElement;
+import com.projeto.simulacao.FissaoNuclear.Models.Reactor.Params.*;
+import com.projeto.simulacao.FissaoNuclear.Models.ReactorSize;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -10,6 +13,8 @@ import lombok.*;
 @Table(name = "reactor")
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
+@Getter
+@Setter
 public class Reactor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,17 +37,17 @@ public class Reactor {
      */
 
 
-    private String reactorType; //Ex: PWR, BWR, Fast Breeder
+    private ReactorType reactorType; //Ex: PWR, BWR, Fast Breeder
 
-    private double maxTemperature; //Em Kelvin
+    private MaxTemperature maxTemperature; //Em Kelvin
 
-    private double maxPressure; //Em MPa
+    private MaxPressure maxPressure; //Em MPa
 
-    private double coreMaxVolume; //Em Liters
+    private CoreMaxVolume coreMaxVolume; //Em Liters
 
-    private double fuelCapacity; //Em kg
+    private FuelCapacity fuelCapacity; //Em kg
 
-    private String moderatorType; //Ex: light water, graphite
+    private ModeratorType moderatorType; //Ex: light water, graphite
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "reactor_size_id")
@@ -79,77 +84,5 @@ public class Reactor {
     }
 
     public Reactor() {
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getReactorType() {
-        return reactorType;
-    }
-
-    public void setReactorType(String reactorType) {
-        this.reactorType = reactorType;
-    }
-
-    public double getMaxTemperature() {
-        return maxTemperature;
-    }
-
-    public void setMaxTemperature(double maxTemperature) {
-        this.maxTemperature = maxTemperature;
-    }
-
-    public double getMaxPressure() {
-        return maxPressure;
-    }
-
-    public void setMaxPressure(double maxPressure) {
-        this.maxPressure = maxPressure;
-    }
-
-    public double getCoreMaxVolume() {
-        return coreMaxVolume;
-    }
-
-    public void setCoreMaxVolume(double coreMaxVolume) {
-        this.coreMaxVolume = coreMaxVolume;
-    }
-
-    public double getFuelCapacity() {
-        return fuelCapacity;
-    }
-
-    public void setFuelCapacity(double fuelCapacity) {
-        this.fuelCapacity = fuelCapacity;
-    }
-
-    public String getModeratorType() {
-        return moderatorType;
-    }
-
-    public void setModeratorType(String moderatorType) {
-        this.moderatorType = moderatorType;
-    }
-
-    public ReactorSize getReactorSize() {
-        return reactorSize;
-    }
-
-    public void setReactorSize(ReactorSize reactorSize) {
-        this.reactorSize = reactorSize;
-    }
-
-    public ChemicalElement getChemicalElement() {
-        return chemicalElement;
-    }
-
-    public void setChemicalElement(ChemicalElement chemicalElement) {
-        this.chemicalElement = chemicalElement;
     }
 }
